@@ -12,6 +12,7 @@
  */
 export function getCohort(student) {
   // TODO
+  return student.cohort;
 }
 
 /**
@@ -31,6 +32,7 @@ export function getCohort(student) {
  */
 export function sortStudents(studentA, studentB) {
   // TODO
+  return studentA.name > studentB.name ? studentB : studentA;
 }
 
 /**
@@ -48,6 +50,10 @@ export function sortStudents(studentA, studentB) {
  */
 export function makeFlag(color, icon) {
   // TODO
+  return {
+    color,
+    icon,
+  };
 }
 
 /**
@@ -64,6 +70,8 @@ export function makeFlag(color, icon) {
  */
 export function increment(count) {
   // TODO
+  count.value += 1;
+  return count;
 }
 
 /**
@@ -91,6 +99,18 @@ export function increment(count) {
  */
 export function getTaxicabDistance(from, to) {
   // TODO
+  const getDif = (from, to) => {
+    const rawDif = from > to ? from - to : to - from;
+    let positiveDif;
+    if (rawDif >= 0) {
+      positiveDif = rawDif;
+    } else {
+      positiveDif = rawDif * -1;
+    }
+    return positiveDif;
+  };
+
+  return getDif(from.x, to.x) + getDif(from.y, to.y);
 }
 
 /**
@@ -106,7 +126,9 @@ export function getTaxicabDistance(from, to) {
  * getHerbivores([{name: "Rabbit", isHerbivore: true}]); // [{name: "Rabbit", isHerbivore: true}]
  */
 export function getHerbivores(animals) {
+  if (!Array.isArray(animals)) return [];
   // TODO
+  return animals.filter((animal) => animal.isHerbivore);
 }
 
 /**
@@ -122,7 +144,15 @@ export function getHerbivores(animals) {
  * getCarnivoreNames([{name: "Wolf", isCarnivore: true}]); // ["Wolf"]
  */
 export function getCarnivoreNames(animals) {
+  if (!Array.isArray(animals)) return [];
   // TODO
+  const carnivores = animals.reduce((acc, cur) => {
+    if (cur.isCarnivore) {
+      acc.push(cur.name);
+    }
+    return acc;
+  }, []);
+  return carnivores;
 }
 
 /**
@@ -144,6 +174,9 @@ export function getCarnivoreNames(animals) {
  */
 export function getTotalCost(cart) {
   // TODO
+  return cart.reduce((acc, cur) => {
+    return acc + cur.quantity * cur.price;
+  }, 0);
 }
 
 /**
@@ -164,6 +197,12 @@ export function getTotalCost(cart) {
  */
 export function zip(keys, values) {
   // TODO
+  const obj = {};
+  for (let i = 0; i < keys.length; i++) {
+    obj[keys[i]] = values[i];
+  }
+
+  return obj;
 }
 
 /**
@@ -180,4 +219,14 @@ export function zip(keys, values) {
  */
 export function countCharacters(word) {
   // TODO
+
+  let charObj = {};
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] in charObj) {
+      charObj[word[i]] = charObj[word[i]] + 1;
+    } else {
+      charObj[word[i]] = 1;
+    }
+  }
+  return charObj;
 }
