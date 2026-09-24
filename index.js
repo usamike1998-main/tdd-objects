@@ -111,6 +111,7 @@ export function getTaxicabDistance(from, to) {
   };
 
   return getDif(from.x, to.x) + getDif(from.y, to.y);
+  // return Math.abs(from.x - to.x) + Math.abs(from.y - to.y)
 }
 
 /**
